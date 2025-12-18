@@ -25,14 +25,17 @@
                 <div class="p-8">
                     <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-2xl">💵</div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-2">Calculadora de Sueldo</h2>
-                    <p class="text-gray-500 text-sm mb-6">Descuentos de ley (Jubilación, Obra Social, PAMI).</p>
+                    <p class="text-gray-500 text-sm mb-6">Descuentos de ley actualizados a 2025.</p>
                     <div class="space-y-4">
                         <input type="number" id="bruto" placeholder="Sueldo Bruto Mensual" class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
                         <button onclick="calcular()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">Calcular Neto</button>
                     </div>
-                    <div id="resultados" class="hidden mt-6 p-5 bg-indigo-50 rounded-2xl border border-indigo-100">
-                        <div class="flex justify-between text-sm mb-2 text-indigo-900"><span>Descuentos Ley (17%)</span><span id="resJub" class="font-bold text-red-500"></span></div>
-                        <div class="flex justify-between text-xl font-bold text-indigo-950 border-t pt-2"><span>Sueldo Neto:</span><span id="resNeto"></span></div>
+
+                    <div id="resultados" class="hidden mt-6 p-5 bg-indigo-50 rounded-2xl border border-indigo-100 space-y-2">
+                        <div class="flex justify-between text-sm text-gray-600"><span>Jubilación (11%)</span><span id="detJub" class="font-medium text-red-500"></span></div>
+                        <div class="flex justify-between text-sm text-gray-600"><span>Obra Social (3%)</span><span id="detOS" class="font-medium text-red-500"></span></div>
+                        <div class="flex justify-between text-sm text-gray-600"><span>PAMI (3%)</span><span id="detPami" class="font-medium text-red-500"></span></div>
+                        <div class="flex justify-between text-xl font-bold text-indigo-950 border-t pt-2 mt-2"><span>Sueldo Neto:</span><span id="resNeto"></span></div>
                     </div>
                 </div>
             </div>
@@ -41,14 +44,13 @@
                 <div class="p-8">
                     <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-2xl">🎁</div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-2">Cálculo de Aguinaldo</h2>
-                    <p class="text-gray-500 text-sm mb-6">SAC proporcional según el mejor sueldo del semestre.</p>
+                    <p class="text-gray-500 text-sm mb-6">SAC proporcional según el mejor sueldo bruto.</p>
                     <div class="space-y-4">
                         <input type="number" id="sacBruto" placeholder="Mejor Sueldo del Semestre" class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
                         <button onclick="calcularSAC()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">Calcular SAC</button>
                     </div>
                     <div id="resSACContainer" class="hidden mt-6 p-5 bg-emerald-50 rounded-2xl border border-emerald-100 text-center">
-                        <p class="text-sm text-emerald-800">Aguinaldo Neto Estimado</p>
-                        <p id="resSAC" class="text-3xl font-black text-emerald-700"></p>
+                        <p id="resSAC" class="text-emerald-700"></p>
                     </div>
                 </div>
             </div>
@@ -59,139 +61,66 @@
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
             <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-blue-500 card-hover">
                 <h3 class="font-bold text-lg mb-2 text-blue-900">📑 Paritarias 2025</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Muchos gremios (Comercio, Sanidad, Bancarios) están cerrando acuerdos con revisión bimestral. Es fundamental revisar si tu sueldo incluye los conceptos <strong>"No Remunerativos"</strong>.
-                </p>
+                <p class="text-gray-600 text-sm leading-relaxed text-pretty">Revisá si tu sueldo incluye conceptos "No Remunerativos", los cuales no aportan a jubilación pero afectan el bolsillo neto.</p>
             </div>
-
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-amber-500 card-hover">
-                <h3 class="font-bold text-lg mb-2 text-amber-900">⚠️ No Remunerativos</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Estos montos no llevan descuentos de jubilación ni obra social, pero <strong>tampoco suman</strong> para el cálculo de tu aguinaldo ni de tu futura jubilación.
-                </p>
-            </div>
-
             <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-rose-500 card-hover">
-                <h3 class="font-bold text-lg mb-2 text-rose-900">📉 Ganancias (Cuarta Categoría)</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Si tu sueldo bruto supera el piso legal, se aplicará una retención adicional. Las escalas son progresivas y dependen de tus deducciones personales (familia, alquiler, etc.).
-                </p>
+                <h3 class="font-bold text-lg mb-2 text-rose-900">📉 Impuesto a las Ganancias</h3>
+                <p class="text-gray-600 text-sm leading-relaxed text-pretty">Si superás el piso legal, se aplicarán retenciones adicionales según las escalas vigentes de AFIP.</p>
             </div>
-
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-purple-500 card-hover">
-                <h3 class="font-bold text-lg mb-2 text-purple-900">🔝 Tope de Aportes</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Existe un monto máximo (tope) sobre el cual se aplican los descuentos del 17%. Si ganás por encima de ese tope, tu neto será mayor porcentualmente.
-                </p>
-            </div>
-
             <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-cyan-500 card-hover">
                 <h3 class="font-bold text-lg mb-2 text-cyan-900">📍 SMVM</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    El Salario Mínimo, Vital y Móvil es la base legal en Argentina. Ningún trabajador de jornada completa debería percibir menos de este monto bruto.
-                </p>
-            </div>
-
-            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-slate-500 card-hover">
-                <h3 class="font-bold text-lg mb-2 text-slate-900">🔎 Controlar el Recibo</h3>
-                <p class="text-gray-600 text-sm leading-relaxed">
-                    Siempre verificá que los aportes figuren en la app de <strong>MI AFIP</strong>. Es la única forma de asegurar que tu empleador está pagando tus cargas sociales.
-                </p>
-            </div>
-        </div>
-        <div class="max-w-4xl mx-auto mb-20">
-            <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Preguntas Frecuentes</h2>
-            <div class="space-y-4">
-                
-                <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-gray-700 hover:bg-indigo-50 transition-colors">
-                        <span>¿Cómo se calcula el aguinaldo si no trabajé los 6 meses completos?</span>
-                        <span class="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <div class="p-6 pt-0 text-gray-600 text-sm leading-relaxed border-t border-gray-50">
-                        Si trabajaste menos tiempo, se realiza un cálculo proporcional: 
-                        <strong>(Sueldo / 2) / 180 días x días trabajados</strong>. 
-                        Nuestra calculadora estima el SAC semestral completo.
-                    </div>
-                </details>
-
-                <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-gray-700 hover:bg-indigo-50 transition-colors">
-                        <span>¿El sueldo neto incluye el bono por presentismo?</span>
-                        <span class="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <div class="p-6 pt-0 text-gray-600 text-sm leading-relaxed border-t border-gray-50">
-                        Sí, el presentismo es un concepto <strong>remunerativo</strong>. Esto significa que se suma a tu básico para formar el sueldo bruto y sobre ese total se aplican los descuentos del 17%.
-                    </div>
-                </details>
-
-                <details class="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-all">
-                    <summary class="flex justify-between items-center p-6 cursor-pointer list-none font-bold text-gray-700 hover:bg-indigo-50 transition-colors">
-                        <span>¿Qué es el "piso" de Ganancias en 2025?</span>
-                        <span class="transition group-open:rotate-180">▼</span>
-                    </summary>
-                    <div class="p-6 pt-0 text-gray-600 text-sm leading-relaxed border-t border-gray-50">
-                        Es el monto mínimo a partir del cual el estado comienza a retener el impuesto. Este valor se actualiza periódicamente según el índice RIPTE o decisiones del Poder Ejecutivo. Consultá siempre la tabla de AFIP vigente.
-                    </div>
-                </details>
-
+                <p class="text-gray-600 text-sm leading-relaxed text-pretty">El Salario Mínimo es la base para jornada completa. Nadie debería ganar menos de este monto bruto.</p>
             </div>
         </div>
 
         <footer class="mt-20 border-t border-gray-200 py-12 text-center">
             <p class="text-gray-500 font-semibold uppercase tracking-widest text-xs mb-4">Proyecto de Análisis Informático</p>
-            <p class="text-gray-400 text-sm">Desarrollado por [Tu Nombre] | Datos actualizados a Diciembre 2025</p>
+            <p class="text-gray-400 text-sm">Desarrollado por [Tu Nombre] | Datos actualizados 2025</p>
         </footer>
     </div>
 
     <script>
-      const FORMATTER = new Intl.NumberFormat('es-AR', { 
-    style: 'currency', 
-    currency: 'ARS',
-    minimumFractionDigits: 2 
-});
+        const FORMATTER = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 });
 
-function calcular() {
-    const bruto = parseFloat(document.getElementById('bruto').value);
-    if (!bruto || bruto <= 0) return alert("Por favor, ingresá un sueldo válido");
+        function calcular() {
+            const bruto = parseFloat(document.getElementById('bruto').value);
+            if (!bruto || bruto <= 0) return alert("Ingresá un sueldo válido");
 
-    // Lógica de descuentos Argentina (17%)
-    const jub = bruto * 0.11;
-    const os = bruto * 0.03;
-    const pami = bruto * 0.03;
-    const totalDescuentos = jub + os + pami;
-    const neto = bruto - totalDescuentos;
+            const jub = bruto * 0.11;
+            const os = bruto * 0.03;
+            const pami = bruto * 0.03;
+            const neto = bruto - (jub + os + pami);
 
-    // Actualizar UI con desglose
-    document.getElementById('resJub').innerText = "- " + FORMATTER.format(totalDescuentos);
-    document.getElementById('resNeto').innerText = FORMATTER.format(neto);
-    
-    // Mostramos el panel
-    document.getElementById('resultados').classList.remove('hidden');
-}
+            // ACTUALIZAMOS LOS CAMPOS DISCRIMINADOS
+            document.getElementById('detJub').innerText = "- " + FORMATTER.format(jub);
+            document.getElementById('detOS').innerText = "- " + FORMATTER.format(os);
+            document.getElementById('detPami').innerText = "- " + FORMATTER.format(pami);
+            document.getElementById('resNeto').innerText = FORMATTER.format(neto);
+            
+            document.getElementById('resultados').classList.remove('hidden');
+        }
 
-function calcularSAC() {
-    const sacBrutoInput = parseFloat(document.getElementById('sacBruto').value);
-    if (!sacBrutoInput || sacBrutoInput <= 0) return alert("Por favor, ingresá un monto válido");
+        function calcularSAC() {
+            const sacBrutoInput = parseFloat(document.getElementById('sacBruto').value);
+            if (!sacBrutoInput || sacBrutoInput <= 0) return alert("Ingresá un monto");
 
-    // 1. El aguinaldo bruto es la mitad del mejor sueldo
-    const aguinaldoBruto = sacBrutoInput / 2;
-    
-    // 2. Al aguinaldo también se le resta el 17% de ley
-    const descuentosSAC = aguinaldoBruto * 0.17;
-    const aguinaldoNeto = aguinaldoBruto - descuentosSAC;
+            const sacBruto = sacBrutoInput / 2;
+            const sacDesc = sacBruto * 0.17;
+            const sacNeto = sacBruto - sacDesc;
 
-    // Actualizar UI del SAC
-    // Vamos a agregar un detalle para que el usuario vea el bruto vs neto
-    document.getElementById('resSAC').innerHTML = `
-        <span class="text-xs text-gray-500 block font-normal">Bruto: ${FORMATTER.format(aguinaldoBruto)}</span>
-        ${FORMATTER.format(aguinaldoNeto)}
-    `;
-    document.getElementById('resSACContainer').classList.remove('hidden');
-}
+            document.getElementById('resSAC').innerHTML = `
+                <div class="text-xs text-emerald-800 font-normal mb-1">
+                    Aguinaldo Bruto: ${FORMATTER.format(sacBruto)} <br>
+                    Desc. Ley (17%): - ${FORMATTER.format(sacDesc)}
+                </div>
+                <div class="text-2xl font-black">${FORMATTER.format(sacNeto)}</div>
+            `;
+            document.getElementById('resSACContainer').classList.remove('hidden');
+        }
     </script>
 </body>
 </html>
+
 
 
 
