@@ -184,9 +184,43 @@
             `;
             document.getElementById('resSACContainer').classList.remove('hidden');
         }
+        function toggleFeedback() {
+    const modal = document.getElementById('feedbackModal');
+    modal.classList.toggle('hidden');
+}
+
+function enviarFeedback() {
+    const texto = document.getElementById('feedbackText').value;
+    if (!texto) return alert("Por favor, escribí algo antes de enviar.");
+    
+    const mensaje = encodeURIComponent("¡Hola! Tengo una sugerencia para el Portal Salarial: " + texto);
+    
+    window.open(`https://wa.me/5491130842987?text=${mensaje}`, '_blank');
+    
+    document.getElementById('feedbackText').value = "";
+    toggleFeedback();
+}
     </script>
+    <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="toggleFeedback()" class="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-2xl transition-all hover:scale-110 flex items-center justify-center group">
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap mr-0 group-hover:mr-2">¿Sugerencias?</span>
+        <span class="text-xl">💬</span>
+    </button>
+</div>
+
+<div id="feedbackModal" class="hidden fixed bottom-24 right-6 z-50 w-80 bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden animate-bounce-in">
+    <div class="bg-indigo-600 p-4 text-white text-center font-bold">
+        ¡Tu opinión cuenta!
+    </div>
+    <div class="p-6">
+        <p class="text-xs text-gray-500 mb-4 text-center">Contame qué otra calculadora te gustaría ver o si encontraste algún error.</p>
+        <textarea id="feedbackText" placeholder="Escribí aquí..." class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-indigo-500 resize-none h-24 mb-4"></textarea>
+        <button onclick="enviarFeedback()" class="w-full bg-indigo-600 text-white font-bold py-2 rounded-xl hover:bg-indigo-700 transition-all">Enviar vía WhatsApp</button>
+    </div>
+</div>
 </body>
 </html>
+
 
 
 
