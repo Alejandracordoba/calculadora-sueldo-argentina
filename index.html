@@ -3,128 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Salarial 2025 | Herramientas para el Trabajador</title>
+    <title>Portal Salarial Argentina 2025 | Info y Herramientas</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #f0f2f5; min-height: 100vh; }
-        .header-gradient { background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%); }
-        .card-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        body { background: #f8fafc; min-height: 100vh; }
+        .header-gradient { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body class="font-sans text-gray-800">
 
-    <header class="header-gradient text-white pt-12 pb-24 px-4 text-center">
-        <h1 class="text-4xl font-extrabold mb-2">Portal Salarial Argentina</h1>
-        <p class="text-indigo-100 max-w-2xl mx-auto">Calculá tus ingresos, conocé tus derechos y analizá las tendencias del mercado laboral actual.</p>
+    <header class="header-gradient text-white pt-16 pb-32 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Portal Salarial Argentina</h1>
+        <p class="text-indigo-100 max-w-2xl mx-auto text-lg">Análisis detallado de ingresos, paritarias y beneficios para el sector trabajador.</p>
     </header>
 
-    <div class="max-w-6xl mx-auto px-4 -mt-16">
-        <div class="grid md:grid-cols-2 gap-8 mb-12">
-            
+    <div class="max-w-6xl mx-auto px-4 -mt-20">
+        <div class="grid md:grid-cols-2 gap-8 mb-16">
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden card-hover border-t-8 border-indigo-600">
                 <div class="p-8">
-                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
-                        <span class="text-2xl">💵</span>
-                    </div>
+                    <div class="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4 text-2xl">💵</div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-2">Calculadora de Sueldo</h2>
-                    <p class="text-gray-500 text-sm mb-6">Calculá tu salario neto con los descuentos de ley actuales.</p>
-                    
+                    <p class="text-gray-500 text-sm mb-6">Descuentos de ley (Jubilación, Obra Social, PAMI).</p>
                     <div class="space-y-4">
-                        <input type="number" id="bruto" placeholder="Sueldo Bruto Mensual" 
-                            class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
-                        <button onclick="calcular()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">
-                            Calcular Neto
-                        </button>
+                        <input type="number" id="bruto" placeholder="Sueldo Bruto Mensual" class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-indigo-500 transition-all">
+                        <button onclick="calcular()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">Calcular Neto</button>
                     </div>
-
-                    <div id="resultados" class="hidden mt-6 p-4 bg-indigo-50 rounded-2xl border border-indigo-100 animate-fade-in">
-                        <div class="flex justify-between text-sm mb-2 text-indigo-900"><span>Descuentos (17%)</span><span id="resJub" class="font-bold text-red-500"></span></div>
-                        <div class="flex justify-between text-xl font-bold text-indigo-950 border-t pt-2"><span>Neto en mano:</span><span id="resNeto"></span></div>
+                    <div id="resultados" class="hidden mt-6 p-5 bg-indigo-50 rounded-2xl border border-indigo-100">
+                        <div class="flex justify-between text-sm mb-2 text-indigo-900"><span>Descuentos Ley (17%)</span><span id="resJub" class="font-bold text-red-500"></span></div>
+                        <div class="flex justify-between text-xl font-bold text-indigo-950 border-t pt-2"><span>Sueldo Neto:</span><span id="resNeto"></span></div>
                     </div>
                 </div>
             </div>
 
             <div class="bg-white rounded-3xl shadow-xl overflow-hidden card-hover border-t-8 border-emerald-500">
                 <div class="p-8">
-                    <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-                        <span class="text-2xl">🎁</span>
-                    </div>
+                    <div class="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4 text-2xl">🎁</div>
                     <h2 class="text-2xl font-bold text-gray-800 mb-2">Cálculo de Aguinaldo</h2>
-                    <p class="text-gray-500 text-sm mb-6">Estimá tu SAC (Sueldo Anual Complementario) neto.</p>
-                    
+                    <p class="text-gray-500 text-sm mb-6">SAC proporcional según el mejor sueldo del semestre.</p>
                     <div class="space-y-4">
-                        <input type="number" id="sacBruto" placeholder="Mejor Sueldo del Semestre" 
-                            class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
-                        <button onclick="calcularSAC()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">
-                            Calcular SAC
-                        </button>
+                        <input type="number" id="sacBruto" placeholder="Mejor Sueldo del Semestre" class="w-full p-4 bg-gray-50 rounded-xl border border-gray-200 outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+                        <button onclick="calcularSAC()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 rounded-xl shadow-lg transition-all">Calcular SAC</button>
                     </div>
-
-                    <div id="resSACContainer" class="hidden mt-6 p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-                        <div class="text-center">
-                            <p class="text-sm text-emerald-800">Aguinaldo Neto a Cobrar</p>
-                            <p id="resSAC" class="text-3xl font-black text-emerald-700"></p>
-                        </div>
+                    <div id="resSACContainer" class="hidden mt-6 p-5 bg-emerald-50 rounded-2xl border border-emerald-100 text-center">
+                        <p class="text-sm text-emerald-800">Aguinaldo Neto Estimado</p>
+                        <p id="resSAC" class="text-3xl font-black text-emerald-700"></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="space-y-8 mb-16">
-            <h2 class="text-3xl font-bold text-gray-800 text-center mb-8">Información Clave 2025</h2>
-            
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-orange-400">
-                    <h3 class="font-bold text-lg text-orange-700 mb-2">🔥 Paritarias IT</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        El gremio de informáticos y las grandes cámaras de software están ajustando sueldos trimestralmente. Un Junior hoy ronda los <strong>$800.000 - $1.200.000</strong> según la empresa.
-                    </p>
-                </div>
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-10">Guía para el Trabajador Argentino</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-blue-500 card-hover">
+                <h3 class="font-bold text-lg mb-2 text-blue-900">📑 Paritarias 2025</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Muchos gremios (Comercio, Sanidad, Bancarios) están cerrando acuerdos con revisión bimestral. Es fundamental revisar si tu sueldo incluye los conceptos <strong>"No Remunerativos"</strong>.
+                </p>
+            </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-blue-400">
-                    <h3 class="font-bold text-lg text-blue-700 mb-2">📉 Descuentos de Ley</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        ¿Sabías que el 17% se divide en: <strong>11% Jubilación</strong>, <strong>3% Obra Social</strong> y <strong>3% Ley 19.032</strong>? Es igual para todos los empleados en blanco.
-                    </p>
-                </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-amber-500 card-hover">
+                <h3 class="font-bold text-lg mb-2 text-amber-900">⚠️ No Remunerativos</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Estos montos no llevan descuentos de jubilación ni obra social, pero <strong>tampoco suman</strong> para el cálculo de tu aguinaldo ni de tu futura jubilación.
+                </p>
+            </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-md border-l-4 border-purple-400">
-                    <h3 class="font-bold text-lg text-purple-700 mb-2">📅 Fechas de Cobro</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        El sueldo se debe pagar hasta el <strong>4to día hábil</strong> del mes. El aguinaldo tiene fecha límite el 30 de junio y el 18 de diciembre.
-                    </p>
-                </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-rose-500 card-hover">
+                <h3 class="font-bold text-lg mb-2 text-rose-900">📉 Ganancias (Cuarta Categoría)</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Si tu sueldo bruto supera el piso legal, se aplicará una retención adicional. Las escalas son progresivas y dependen de tus deducciones personales (familia, alquiler, etc.).
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-purple-500 card-hover">
+                <h3 class="font-bold text-lg mb-2 text-purple-900">🔝 Tope de Aportes</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Existe un monto máximo (tope) sobre el cual se aplican los descuentos del 17%. Si ganás por encima de ese tope, tu neto será mayor porcentualmente.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-cyan-500 card-hover">
+                <h3 class="font-bold text-lg mb-2 text-cyan-900">📍 SMVM</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    El Salario Mínimo, Vital y Móvil es la base legal en Argentina. Ningún trabajador de jornada completa debería percibir menos de este monto bruto.
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border-l-8 border-slate-500 card-hover">
+                <h3 class="font-bold text-lg mb-2 text-slate-900">🔎 Controlar el Recibo</h3>
+                <p class="text-gray-600 text-sm leading-relaxed">
+                    Siempre verificá que los aportes figuren en la app de <strong>MI AFIP</strong>. Es la única forma de asegurar que tu empleador está pagando tus cargas sociales.
+                </p>
             </div>
         </div>
 
-        <footer class="border-t border-gray-200 py-10 text-center">
-            <p class="text-gray-400 text-sm">Proyecto desarrollado por [Tu Nombre] | Técnica en Análisis Informáticos</p>
-            <p class="text-xs text-gray-400 mt-2 italic">Valores actualizados a Diciembre 2025 - Argentina</p>
+        <footer class="mt-20 border-t border-gray-200 py-12 text-center">
+            <p class="text-gray-500 font-semibold uppercase tracking-widest text-xs mb-4">Proyecto de Análisis Informático</p>
+            <p class="text-gray-400 text-sm">Desarrollado por [Tu Nombre] | Datos actualizados a Diciembre 2025</p>
         </footer>
     </div>
 
     <script>
-        const FORMATTER = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' });
+      const FORMATTER = new Intl.NumberFormat('es-AR', { 
+    style: 'currency', 
+    currency: 'ARS',
+    minimumFractionDigits: 2 
+});
 
-        function calcular() {
-            const bruto = parseFloat(document.getElementById('bruto').value);
-            if (!bruto) return;
-            const desc = bruto * 0.17;
-            const neto = bruto - desc;
-            document.getElementById('resJub').innerText = "- " + FORMATTER.format(desc);
-            document.getElementById('resNeto').innerText = FORMATTER.format(neto);
-            document.getElementById('resultados').classList.remove('hidden');
-        }
+function calcular() {
+    const bruto = parseFloat(document.getElementById('bruto').value);
+    if (!bruto || bruto <= 0) return alert("Por favor, ingresá un sueldo válido");
 
-        function calcularSAC() {
-            const sacBruto = parseFloat(document.getElementById('sacBruto').value);
-            if (!sacBruto) return;
-            const aguinaldoNeto = (sacBruto / 2) * 0.83;
-            document.getElementById('resSAC').innerText = FORMATTER.format(aguinaldoNeto);
-            document.getElementById('resSACContainer').classList.remove('hidden');
-        }
+    // Lógica de descuentos Argentina (17%)
+    const jub = bruto * 0.11;
+    const os = bruto * 0.03;
+    const pami = bruto * 0.03;
+    const totalDescuentos = jub + os + pami;
+    const neto = bruto - totalDescuentos;
+
+    // Actualizar UI con desglose
+    document.getElementById('resJub').innerText = "- " + FORMATTER.format(totalDescuentos);
+    document.getElementById('resNeto').innerText = FORMATTER.format(neto);
+    
+    // Mostramos el panel
+    document.getElementById('resultados').classList.remove('hidden');
+}
+
+function calcularSAC() {
+    const sacBrutoInput = parseFloat(document.getElementById('sacBruto').value);
+    if (!sacBrutoInput || sacBrutoInput <= 0) return alert("Por favor, ingresá un monto válido");
+
+    // 1. El aguinaldo bruto es la mitad del mejor sueldo
+    const aguinaldoBruto = sacBrutoInput / 2;
+    
+    // 2. Al aguinaldo también se le resta el 17% de ley
+    const descuentosSAC = aguinaldoBruto * 0.17;
+    const aguinaldoNeto = aguinaldoBruto - descuentosSAC;
+
+    // Actualizar UI del SAC
+    // Vamos a agregar un detalle para que el usuario vea el bruto vs neto
+    document.getElementById('resSAC').innerHTML = `
+        <span class="text-xs text-gray-500 block font-normal">Bruto: ${FORMATTER.format(aguinaldoBruto)}</span>
+        ${FORMATTER.format(aguinaldoNeto)}
+    `;
+    document.getElementById('resSACContainer').classList.remove('hidden');
+}
     </script>
 </body>
 </html>
+
 
