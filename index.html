@@ -3,84 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Sueldo Neto 2025 | Argentina</title>
-    <meta name="description" content="Calcula tu sueldo neto de forma fácil y rápida con los descuentos de ley actualizados a 2025.">
+    <title>Calculadora Salarial Argentina 2025 | Sueldo Neto y Aguinaldo</title>
+    <meta name="description" content="Calculá tu sueldo neto, aguinaldo y conocé las mejores paritarias de Argentina en 2025. Información actualizada para trabajadores.">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
+        body { background: linear-gradient(135deg, #1e1b4b 0%, #4338ca 100%); min-height: 100vh; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center p-4 font-sans text-gray-800">
+<body class="p-4 font-sans text-gray-800">
 
-    <main class="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md border border-white/20">
-        <h1 class="text-2xl font-bold text-center text-indigo-700 mb-6">Calculadora de Sueldo Neto</h1>
-        
-        <div class="space-y-4">
-            <div>
-                <label class="block text-sm font-medium mb-1">Sueldo Bruto Mensual ($)</label>
-                <input type="number" id="bruto" placeholder="Ej: 800000" 
-                    class="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 outline-none transition-all">
-            </div>
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-10 pt-8">
+            <h1 class="text-4xl font-extrabold text-white mb-2">Portal Salarial Argentina</h1>
+            <p class="text-indigo-200">Herramientas precisas para el trabajador argentino</p>
+        </header>
 
-            <button onclick="calcular()" 
-                class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-colors shadow-lg">
-                Calcular Descuentos
-            </button>
+        <div class="grid md:grid-cols-2 gap-8">
+            <main class="glass p-6 rounded-2xl shadow-xl border border-white/20">
+                <h2 class="text-xl font-bold text-indigo-700 mb-4 flex items-center">
+                    💰 Calculadora de Neto
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Sueldo Bruto Mensual</label>
+                        <input type="number" id="bruto" placeholder="Ej: 900000" class="w-full p-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <button onclick="calcular()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-all shadow-lg">Calcular Neto</button>
+                    
+                    <div id="resultados" class="hidden mt-4 p-4 bg-indigo-50 rounded-lg space-y-2 border border-indigo-100">
+                        <div class="flex justify-between text-sm"><span>Jubilación (11%)</span><span id="resJub" class="text-red-600 font-bold"></span></div>
+                        <div class="flex justify-between text-sm font-bold text-indigo-800 border-t pt-2"><span>Sueldo en mano:</span><span id="resNeto"></span></div>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="glass p-6 rounded-2xl shadow-xl border border-white/20">
+                <h2 class="text-xl font-bold text-indigo-700 mb-4 flex items-center">
+                    🎁 Calculadora de Aguinaldo
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Mejor Sueldo del Semestre (Bruto)</label>
+                        <input type="number" id="sacBruto" placeholder="Ej: 1000000" class="w-full p-3 rounded-lg border border-gray-300 outline-none focus:ring-2 focus:ring-indigo-500">
+                    </div>
+                    <button onclick="calcularSAC()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-lg transition-all shadow-lg">Calcular SAC</button>
+                    
+                    <div id="resSACContainer" class="hidden mt-4 p-4 bg-emerald-50 rounded-lg border border-emerald-100">
+                        <div class="text-center">
+                            <span class="text-sm text-emerald-800 block">Aguinaldo Neto Estimado:</span>
+                            <span id="resSAC" class="text-2xl font-bold text-emerald-700"></span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
         </div>
 
-        <div id="resultados" class="mt-8 space-y-3 hidden border-t pt-6">
-            <div class="flex justify-between text-sm">
-                <span>Jubilación (11%)</span>
-                <span class="font-semibold text-red-500" id="resJub">-</span>
-            </div>
-            <div class="flex justify-between text-sm">
-                <span>Obra Social (3%)</span>
-                <span class="font-semibold text-red-500" id="resOS">-</span>
-            </div>
-            <div class="flex justify-between text-sm">
-                <span>PAMI (3%)</span>
-                <span class="font-semibold text-red-500" id="resPami">-</span>
-            </div>
-            <div class="flex justify-between text-xl font-bold border-t pt-4 text-indigo-800">
-                <span>Sueldo Neto:</span>
-                <span id="resNeto">-</span>
-            </div>
-        </div>
-    </main>
+        <section class="mt-12 grid md:grid-cols-3 gap-6">
+            <article class="bg-white/10 p-5 rounded-xl border border-white/10 text-white">
+                <h3 class="font-bold text-lg mb-2 text-indigo-300">🚀 Mejores Sueldos 2025</h3>
+                <p class="text-sm opacity-90">El sector de <strong>Software y Servicios Informáticos</strong> sigue liderando los rankings con sueldos que superan la media nacional, seguido por el sector Aceitero y Bancarios.</p>
+            </article>
+            <article class="bg-white/10 p-5 rounded-xl border border-white/10 text-white">
+                <h3 class="font-bold text-lg mb-2 text-indigo-300">📊 Paritarias al día</h3>
+                <p class="text-sm opacity-90">Gremio de Comercio y UOCRA han pactado revisiones mensuales para acompañar la inflación. Es clave revisar tu convenio para verificar el sueldo básico.</p>
+            </article>
+            <article class="bg-white/10 p-5 rounded-xl border border-white/10 text-white">
+                <h3 class="font-bold text-lg mb-2 text-indigo-300">📅 ¿Cuándo se cobra?</h3>
+                <p class="text-sm opacity-90">El primer medio aguinaldo se abona en junio y el segundo en diciembre. Recordá que se calcula sobre el mejor sueldo bruto del periodo.</p>
+            </article>
+        </section>
 
-    <section class="max-w-2xl mt-10 text-white text-center">
-        <h2 class="text-xl font-semibold mb-2">¿Cómo se calcula el sueldo en Argentina?</h2>
-        <p class="text-sm opacity-90">
-            En Argentina, el sueldo neto (o "en mano") es lo que queda tras aplicar los descuentos de ley sobre el bruto: Jubilación, Obra Social y Ley 19.032. 
-            Esta herramienta utiliza las alícuotas vigentes para empleados en relación de dependencia.
-        </p>
-    </section>
+        <footer class="mt-12 text-center text-indigo-200 text-xs pb-10">
+            <p>Hecho con ❤️ por A. Cordoba - Técnica en Análisis Informático</p>
+        </footer>
+    </div>
 
     <script>
+        const FORMATTER = new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS' });
+
         function calcular() {
             const bruto = parseFloat(document.getElementById('bruto').value);
-            
-            if (isNaN(bruto) || bruto <= 0) {
-                alert("Por favor, ingresa un monto válido");
-                return;
-            }
-
+            if (!bruto) return alert("Ingresá un monto");
             const jub = bruto * 0.11;
             const os = bruto * 0.03;
             const pami = bruto * 0.03;
             const neto = bruto - (jub + os + pami);
-
-            // Mostrar valores con formato de moneda
-            document.getElementById('resJub').innerText = "- $" + jub.toLocaleString('es-AR');
-            document.getElementById('resOS').innerText = "- $" + os.toLocaleString('es-AR');
-            document.getElementById('resPami').innerText = "- $" + pami.toLocaleString('es-AR');
-            document.getElementById('resNeto').innerText = "$" + neto.toLocaleString('es-AR');
-
-            // Mostrar el panel de resultados
+            
+            document.getElementById('resJub').innerText = "- " + FORMATTER.format(jub);
+            document.getElementById('resNeto').innerText = FORMATTER.format(neto);
             document.getElementById('resultados').classList.remove('hidden');
+        }
+
+        function calcularSAC() {
+            const sacBruto = parseFloat(document.getElementById('sacBruto').value);
+            if (!sacBruto) return alert("Ingresá un monto");
+            // Cálculo: (Mejor sueldo / 2) - descuentos de ley
+            const aguinaldoBruto = sacBruto / 2;
+            const aguinaldoNeto = aguinaldoBruto * 0.83;
+            
+            document.getElementById('resSAC').innerText = FORMATTER.format(aguinaldoNeto);
+            document.getElementById('resSACContainer').classList.remove('hidden');
         }
     </script>
 </body>
